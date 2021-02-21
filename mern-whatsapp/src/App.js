@@ -9,7 +9,7 @@ import axios from './axios'
 import { useStateValue } from './StateProvider';
 
 function App() {
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -20,8 +20,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    Pusher.logToConsole = true;
-
     const pusher = new Pusher('190f9f22f2e3f3646a67', {
       cluster: 'ap2'
     });
@@ -42,15 +40,13 @@ function App() {
     }
   }, [messages])
 
-  console.log(messages)
-
   return (
     <div className="app">
       {!user ? (
         <Login />
       ) : (
         <div className="app__body">
-          <Sidebar />
+          <Sidebar messages={messages} />
           <Chat messages={messages} />
         </div>
       )}
