@@ -28,6 +28,7 @@ dotenv.config()
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
+    next();
 })
 
 //DB config
@@ -42,6 +43,7 @@ mongoose.connect(connectionUrl, {
 
 //open connection to database
 const db = mongoose.connection
+//once connection is open
 db.once('open', () => {
     console.log("Db connected")
 
@@ -50,7 +52,7 @@ db.once('open', () => {
     const changeStream = msgCollection.watch()
 
     changeStream.on('change', change => {
-        console.log(change)
+        // console.log(change)
 
         //if the change is a new addition (a new message)
         if(change.operationType === 'insert') {

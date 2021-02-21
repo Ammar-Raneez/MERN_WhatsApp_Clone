@@ -7,4 +7,4 @@ const whatsappSchema = new mongoose.Schema({
     receiver: Boolean
 })
 
-module.exports = mongoose.model("Messagecontents", whatsappSchema)
+module.exports = mongoose.model("messagecontents", whatsappSchema)
