@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Chat from './Chat';
 import Sidebar from './Sidebar';
+import Login from './Login';
 //backend uses pusher, frontend uses pusher-js
 import Pusher from 'pusher-js'
 import axios from './axios'
 
 function App() {
+  const [{ user }] = useStateValue();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -43,10 +45,14 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__body">
-        <Sidebar />
-        <Chat messages={messages} />
-      </div>
+      {!user ? (
+        <Login />
+      ) : (
+        <div className="app__body">
+          <Sidebar />
+          <Chat messages={messages} />
+        </div>
+      )}
     </div>
   );
 }
