@@ -24,14 +24,15 @@ function App() {
     });
 
     //subscribe to the channel messages (in server.js we named the channel messages)
-    //bind on the event of insertion (whenever there's an insertion the data is alerted)
+    //bind on the event of insertion (whenever there's an insertion the data is fetched)
     const channel = pusher.subscribe('messages');
     channel.bind('inserted', newMessage => {
-      // alert(JSON.stringify(newMessage));
       //whenever a new message is sent, append it onto our exisiting messages
       setMessages([...messages, newMessage]);
     });
 
+    //unsubscribe and unbind all the connections
+    //to always keep only one channel open
     return () => {
       channel.unbind_all();
       channel.unsubscribe();
