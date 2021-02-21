@@ -6,6 +6,7 @@ import Login from './Login';
 //backend uses pusher, frontend uses pusher-js
 import Pusher from 'pusher-js'
 import axios from './axios'
+import { useStateValue } from './StateProvider';
 
 function App() {
   const [{ user }] = useStateValue();

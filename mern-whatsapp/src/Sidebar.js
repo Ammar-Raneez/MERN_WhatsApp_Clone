@@ -6,12 +6,15 @@ import { Avatar, IconButton } from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import { useStateValue } from './StateProvider';
 
 function Sidebar() {
+	const [{ user }] = useStateValue();
+
 	return (
 		<div className="sidebar">
 			<div className="sidebar__header">
-				<Avatar />
+				<Avatar src={user?.photoURL} />
 				<div className="sidebar__headerRight">
 					<IconButton>
 						<DonutLargeIcon />
